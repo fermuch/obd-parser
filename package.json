@@ -1,5 +1,5 @@
 {
-  "name": "obd-parser",
+  "name": "@ayvu/obd-parser",
   "version": "0.3.0",
   "description": "OBD interface that can send and receive messages over a given connection.",
   "main": "lib/obd-interface.js",
