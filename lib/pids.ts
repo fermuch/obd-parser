@@ -17,4 +17,5 @@ export = {
   FuelSystemStatus: new PIDS.FuelSystemStatus(),
   SupportedPids: new PIDS.SupportedPids(),
   ControlModuleVoltage: new PIDS.ControlModuleVoltage(),
+  AbsoluteLoad: new PIDS.AbsoluteLoad(),
 };

@@ -503,17 +503,17 @@ export class ControlModuleVoltage extends PID {
     super({
       mode: OBD_MESSAGE_TYPES.CURRENT_DATA,
       pid: '42',
-      bytes: 4,
+      bytes: 2,
       name: 'Control Module Voltage',
       min: 0,
       max: 131.584,
-      unit: 'volts'
+      unit: 'V'
     });
   }
 
   public getValueForBytes (bytes: string[]) {
-    const a = parseHexToDecimal(bytes[2]) + parseHexToDecimal(bytes[3]);
-    const b = parseHexToDecimal(bytes[4]) + parseHexToDecimal(bytes[5] || '0');
+    const a = parseHexToDecimal(bytes[2]);
+    const b = parseHexToDecimal(bytes[3]);
 
     return ((a * 256) + b) / 1000;
   }
@@ -522,8 +522,35 @@ export class ControlModuleVoltage extends PID {
     return [
       this.getRandomInt(0, 255).toString(16),
       this.getRandomInt(0, 255).toString(16),
+    ];
+  }
+}
+
+export class AbsoluteLoad extends PID {
+  constructor () {
+    super({
+      mode: OBD_MESSAGE_TYPES.CURRENT_DATA,
+      pid: '43',
+      bytes: 2,
+      name: 'Absolute Load',
+      min: 0,
+      max: 25700,
+      unit: '%'
+    });
+  }
+
+  public getValueForBytes (bytes: string[]) {
+    const a = parseHexToDecimal(bytes[2]);
+    const b = parseHexToDecimal(bytes[3]);
+
+    const val =  (100/255) * ((256 * a) + b);
+    return (val * 100) / 25700;
+  }
+
+  public getRandomBytes () {
+    return [
       this.getRandomInt(0, 255).toString(16),
-      this.getRandomInt(0, 255).toString(16)
+      this.getRandomInt(0, 255).toString(16),
     ];
   }
 }
