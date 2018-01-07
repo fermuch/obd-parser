@@ -19,4 +19,5 @@ export = {
   ControlModuleVoltage: new PIDS.ControlModuleVoltage(),
   AbsoluteLoad: new PIDS.AbsoluteLoad(),
   RunTime: new PIDS.RunTime(),
+  RunTimeMil: new PIDS.RunTimeMil(),
 };
