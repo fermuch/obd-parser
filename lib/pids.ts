@@ -15,5 +15,6 @@ export = {
   ThrottlePosition: new PIDS.ThrottlePosition(),
   ObdStandard: new PIDS.ObdStandard(),
   FuelSystemStatus: new PIDS.FuelSystemStatus(),
-  SupportedPids: new PIDS.SupportedPids()
+  SupportedPids: new PIDS.SupportedPids(),
+  ControlModuleVoltage: new PIDS.ControlModuleVoltage(),
 };

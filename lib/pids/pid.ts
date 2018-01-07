@@ -497,3 +497,33 @@ export class SupportedPids extends PID {
     return supportedPids.join(',');
   }
 }
+
+export class ControlModuleVoltage extends PID {
+  constructor () {
+    super({
+      mode: OBD_MESSAGE_TYPES.CURRENT_DATA,
+      pid: '42',
+      bytes: 4,
+      name: 'Control Module Voltage',
+      min: 0,
+      max: 131.584,
+      unit: 'volts'
+    });
+  }
+
+  public getValueForBytes (bytes: string[]) {
+    const a = parseHexToDecimal(bytes[2]) + parseHexToDecimal(bytes[3]);
+    const b = parseHexToDecimal(bytes[4]) + parseHexToDecimal(bytes[5] || '0');
+
+    return ((a * 256) + b) / 1000;
+  }
+
+  public getRandomBytes () {
+    return [
+      this.getRandomInt(0, 255).toString(16),
+      this.getRandomInt(0, 255).toString(16),
+      this.getRandomInt(0, 255).toString(16),
+      this.getRandomInt(0, 255).toString(16)
+    ];
+  }
+}
