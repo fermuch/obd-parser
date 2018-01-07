@@ -554,3 +554,31 @@ export class AbsoluteLoad extends PID {
     ];
   }
 }
+
+export class RunTime extends PID {
+  constructor () {
+    super({
+      mode: OBD_MESSAGE_TYPES.CURRENT_DATA,
+      pid: '1F',
+      bytes: 2,
+      name: 'Run time since engine start',
+      min: 0,
+      max: 65535,
+      unit: ' seconds'
+    });
+  }
+
+  public getValueForBytes (bytes: string[]) {
+    const a = parseHexToDecimal(bytes[2]);
+    const b = parseHexToDecimal(bytes[3]);
+
+    return (256 * a) + b;
+  }
+
+  public getRandomBytes () {
+    return [
+      this.getRandomInt(0, 255).toString(16),
+      this.getRandomInt(0, 255).toString(16),
+    ];
+  }
+}

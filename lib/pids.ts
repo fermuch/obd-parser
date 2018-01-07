@@ -18,4 +18,5 @@ export = {
   SupportedPids: new PIDS.SupportedPids(),
   ControlModuleVoltage: new PIDS.ControlModuleVoltage(),
   AbsoluteLoad: new PIDS.AbsoluteLoad(),
+  RunTime: new PIDS.RunTime(),
 };
